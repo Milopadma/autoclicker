@@ -1,3 +1,4 @@
+from sys import byteorder
 import tkinter as tk
 from pyautogui import *
 from tkinter.messagebox import showinfo
@@ -17,11 +18,13 @@ userChoice = tk.StringVar()
 def button_clicked():
     print("Button clicked")
     userEntry = entry.get()#get the text in the entry object first
-    time.sleep(2.5)
+    time.sleep(1.5)
     if userChoice.get() == 'left':
-        pyautogui.click(button='left', clicks=int(userEntry), interval=0.08)
+        pyautogui.click(button='left', clicks=int(userEntry), interval=0.05)
     elif userChoice.get() == 'right':
-        pyautogui.click(button='right', clicks=int(userEntry), interval=0.08)
+        pyautogui.click(button='right', clicks=int(userEntry), interval=0.05)
+    else:
+        showinfo("Error", "Please select a button to click.")
     #set the pause time to 1.5 seconds
     # pyautogui.click(button='right', clicks=int(userEntry), interval=0.08) #click the mouse at 100,100 with the number of clicks specified by the userEntry variable
     print("Command Done")
@@ -32,7 +35,7 @@ mainFrame = tk.Frame(master=window) #create frame object
 mainFrame.pack(padx=10, pady=10, expand=True) #place frame on window
 
 #label component
-label1 = tk.Label(mainFrame, text="How many times do you want to click?", bg="white") #create label object
+label1 = tk.Label(mainFrame, text="How many times do you want to click?", bg="white", font = (("Roboto"), 10)) #create label object
 label1.pack(fill='x', expand=True) #place label on frame
 
 #entry component
@@ -48,8 +51,8 @@ checkBox2 = tk.Checkbutton(mainFrame, text="Right Click",variable=userChoice, on
 checkBox2.pack(side='right',fill='y', expand=True) #place checkbox on frame
 
 #button component
-btn = tk.Button(window, text = "Run", command=button_clicked) #create button object
-btn.pack(fill='x', pady=10, padx=10,expand=True) #place button on window
+btn = tk.Button(window, text = "Run", borderwidth=2, fg='#F2F2F2', bg='#404040', command=button_clicked) #create button object
+btn.pack(fill='x', pady=10, padx=10, expand=True) #place button on window
 
 #start the main loop
 window.mainloop() #start the event loop
